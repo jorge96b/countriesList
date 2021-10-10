@@ -1,0 +1,29 @@
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content_img{
+    background-image: url("../assets/Rectangle.png");
+    background-repeat: no-repeat;
+    width: 748px;
+    height: 421px;
+    top: -16px;
+    border-radius: 0px 0px 0px 180px;
+}
+
+.content_title{
+    width: 386px;
+    height: 118px;
+    margin-left: 50px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 59px;
+    color: #09295E;
+}
+
+.content_title_color{
+    color: #21ADCF;
+}
