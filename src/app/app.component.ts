@@ -34,6 +34,7 @@ export class AppComponent implements OnInit{
   ];
   regions: any[] = [];
   selectCountry = 'ShowAll';
+  conuntriSelect: any;
 
   constructor(
     private countriesService: CountriesService
@@ -82,5 +83,25 @@ export class AppComponent implements OnInit{
       })
     }
   } 
+
+  searchInput(event:any){
+    console.log(event);
+  }
+
+  open(countri: any) {
+    this.conuntriSelect = countri;
+    console.log(this.conuntriSelect);
+    const modal = document.getElementById('modal');
+    if(modal != null){
+      modal.style.display='flex';
+    }
+  }
+  
+  close() {
+    const modal = document.getElementById('modal');
+    if(modal != null){
+      modal.style.display='none';
+    }
+  }
   
 }
