@@ -3,3 +3,7 @@
 body {
     margin: 0px;
 }
+
+input[type="text" i] {
+    padding: 0px;
+}

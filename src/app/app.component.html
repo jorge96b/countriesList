@@ -1,10 +1,41 @@
-<div class="content">
-
-
-
-
-    <label class="content_title">Find any <label class="content_title_color">country</label> in the world.</label>
-    <div class="content_img"></div>
+<div>
+    <div class="content">
+        <div class="content_title">
+            <label>Find any <label class="content_title_color">country</label> in the world.</label>
+            <div class="content_search">
+                <input
+                    class="content_search_input"
+                    placeholder="Search country"
+                    type="text">
+                <select class="content_search_select" [(ngModel)]="selectCountry"  name="select" id="selectCountry">
+                    <option value="ShowAll" selected>Show all</option>
+                    <option value="Favorites">Favorites</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Americas">America</option>
+                    <option value="Asia">Asia</option>
+                    <option value="Europe">Europe</option>
+                    <option value="Oceania">Oceania</option>
+                </select>
+                <button (click)="changeCountry()" class="content_search_button" type="button"></button>
+            </div>
+        </div>
+        <div class="content_img"></div>
+    </div>
 </div>
 
+<div class="regions" *ngIf="countriesSelect.length!==0">
+    <div *ngFor="let region of regions">
+        <label class="region_name">{{region.name}}</label>
+        <div *ngFor="let countri of countriesSelect">
+            <div class="countri padding_countries" *ngIf="countri.region==region.value">
+                <img class="countri_flag" [src]="countri.flags[0]">
+                <label class="countri_name">{{countri.name.common}}</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="notFound" *ngIf="countriesSelect.length==0">
+    <label class="notFound_text">No results found</label>
+</div>
 

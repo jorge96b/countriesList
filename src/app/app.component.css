@@ -7,23 +7,117 @@
 .content_img{
     background-image: url("../assets/Rectangle.png");
     background-repeat: no-repeat;
-    width: 748px;
-    height: 421px;
+    width: 74vh;
+    height: 44vh;
     top: -16px;
     border-radius: 0px 0px 0px 180px;
 }
 
 .content_title{
-    width: 386px;
-    height: 118px;
-    margin-left: 50px;
+    width: 40vh;
+    height: 12vh;
+    margin-left: 5vh;
     font-style: normal;
     font-weight: bold;
-    font-size: 50px;
+    font-size: 5vh;
     line-height: 59px;
     color: #09295E;
 }
 
 .content_title_color{
     color: #21ADCF;
+}
+
+.content_search{
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+    height: 5vh;
+    position: absolute;
+}
+
+.content_search_input{
+    padding-left: 10px;
+    background: #FFFFFF;
+    border: none;
+    box-sizing: border-box;
+    height: 4vh;
+    width: 45vw;
+}
+
+.content_search_select{
+    background: #FFFFFF;
+    border: none;
+    box-sizing: border-box;
+    height: 5vh;
+    width: 15vw;
+    margin: 0px 10px;
+}
+
+.content_search_button{
+    height: 5vh;
+    width: 10vw;
+    border: 1px solid #000000;
+    background: #21ADCF url("../assets/Vector.svg") no-repeat center;
+    cursor: pointer;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 0px 11px 11px 0px;
+}
+
+.regions{
+    margin: 0px 50px;
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fill,minmax(30vh, 1fr));
+}
+.countri{
+    display: flex;
+}
+
+.region_name{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    color: #09295E;
+}
+
+.padding_countries{
+    padding: 6px 0px;
+}
+
+.margin-region > div:first-child{
+    padding-bottom: 24px;
+}
+.countri_name{
+    margin-left: 10px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.countri_flag{
+    width: 3vh;
+    height: 2vh;
+}
+.notFound{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+}
+
+.notFound_text{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    color: #BDBDBD;
 }
