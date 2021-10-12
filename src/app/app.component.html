@@ -44,15 +44,18 @@
 <div id="modal" class="bg-modal">
 	<div class="modal-contents">
 		<div (click)="close()" class="close">+</div>
-        <label class="modal-contents-title">{{conuntriSelect?.name.common}}</label><br>
+        <div>
+            <label class="modal-contents-title">{{conuntriSelect?.name.common}} </label>
+            <img *ngIf="!favSelect" (click)="fav(conuntriSelect)" src="../assets/star.svg">
+            <img *ngIf="favSelect" (click)="fav(conuntriSelect)" src="../assets/starSelect.svg">
+        </div>
         <label class="modal-contents-label">Region: {{conuntriSelect?.region}}</label><br>
         <label class="modal-contents-label">Population: {{conuntriSelect?.population}}</label><br>
         <label class="modal-contents-label">Capital: {{conuntriSelect?.capital}}</label><br>
-        <label class="modal-contents-label">Currency: {{conuntriSelect?.currencies['COP'].name}}</label><br>
-        <label class="modal-contents-label">Language: 
-            <label *ngFor="let border of conuntriSelect?.borders">{{border}}</label>
-        </label><br>
-        <label class="modal-contents-label">Border Countries: Brasil, Ecuador, Panamá, Perú, Venezuela.</label><br>
+        <label class="modal-contents-label">Currency: {{conuntriSelect?.currencies |json}}}</label><br>
+        <label class="modal-contents-label">Language: {{conuntriSelect?.languages |json}}</label><br>
+        <label class="modal-contents-label">Border Countries:
+            <label *ngFor="let border of conuntriSelect?.borders">{{border}} </label></label><br>
         <label class="modal-contents-label">Flag:</label><br>
         <img class="modal-contents-img" [src]="conuntriSelect?.flags[0]">
 	</div>

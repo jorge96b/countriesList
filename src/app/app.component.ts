@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { CountriesService } from '../services/countries.service';
 
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit{
   regions: any[] = [];
   selectCountry = 'ShowAll';
   conuntriSelect: any;
+  favSelect = false;
 
   constructor(
     private countriesService: CountriesService
@@ -102,6 +104,11 @@ export class AppComponent implements OnInit{
     if(modal != null){
       modal.style.display='none';
     }
+  }
+
+  fav(countri: any){
+    console.log(countri);
+    this.favSelect = !this.favSelect
   }
   
 }
