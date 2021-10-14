@@ -1,7 +1,9 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { CountriesService } from '../services/countries.service';
-
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { map } from 'rxjs/operators';
+import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,6 +13,7 @@ export class AppComponent implements OnInit{
   title = 'countriesList';
   allCountries : any[] = [];
   countriesSelect : any[] = [];
+  countrisFav : any[] = [];
   allRegions = [
     {
       name : 'Africa',
@@ -37,46 +40,57 @@ export class AppComponent implements OnInit{
   selectCountry = 'ShowAll';
   conuntriSelect: any;
   favSelect = false;
+  iconFav = false;
+  filterCountri: any;
 
   constructor(
-    private countriesService: CountriesService
-  ) { }
+    private countriesService: CountriesService,
+    private readonly afs : AngularFirestore,
+  ) {}
 
   ngOnInit() {
     console.log('consultar');
     this.regions = this.allRegions;
     this.getCountries();
+    this.getFav();
   }
 
   getCountries(){
-    console.log(this.allCountries);
     this.countriesService.getAllCountries().subscribe( (response: any[]) => {
       this.allCountries = this.sortList(response);
       this.countriesSelect = this.allCountries;
-      console.log(this.allCountries);
+      console.log(this.countriesSelect);
     },
     error => {
       this.allCountries= [];
-      console.log(this.allCountries);
       console.log(error)
     });
   }
 
   sortList(list: any[]){
-    console.log(list.sort());
     return list.sort(); 
   }
 
   changeCountry(){
+    this.iconFav = false;
     if(this.selectCountry == 'ShowAll'){
-      console.log('show all');
       this.regions = this.allRegions;
       this.countriesSelect = this.allCountries;
     }else if(this.selectCountry == 'Favorites'){
-      console.log('favoritos');
+      this.iconFav = true;
+      this.regions = [];
+      this.countriesSelect = this.countrisFav;
+      this.countrisFav.forEach((element: any) => {
+        if (this.regions.some(e => e.name === element.region)) {
+          console.log('------esta-----');
+        }else{
+          const region = {name : element.region,value: element.region,};
+          this.regions.push(region);
+        }
+      });
     }else{
       this.countriesSelect = [];
-      this.regions = [{name : this.selectCountry,value: this.selectCountry,},];
+      this.regions = [{name : this.selectCountry,value: this.selectCountry,}];
       this.allCountries.filter( element => {
         element.region == this.selectCountry
         if(element.region == this.selectCountry){
@@ -88,11 +102,11 @@ export class AppComponent implements OnInit{
 
   searchInput(event:any){
     console.log(event);
+    console.log(event.target.value);
   }
 
   open(countri: any) {
     this.conuntriSelect = countri;
-    console.log(this.conuntriSelect);
     const modal = document.getElementById('modal');
     if(modal != null){
       modal.style.display='flex';
@@ -104,11 +118,23 @@ export class AppComponent implements OnInit{
     if(modal != null){
       modal.style.display='none';
     }
+    this.favSelect = !this.favSelect
+  }
+
+  getFav(){
+    this.afs.collectionGroup('countries').valueChanges().subscribe(response => {
+      this.countrisFav = response;
+    });
   }
 
   fav(countri: any){
-    console.log(countri);
     this.favSelect = !this.favSelect
+    this.afs.collection('countries').add(countri);
   }
-  
+
+  disfav(countri: any){
+    this.favSelect = !this.favSelect;
+  }
+
+
 }

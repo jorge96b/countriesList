@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "countries-b2e41": {
+      "hosting": {
+        "countriesList": [
+          "countries-b2e41"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "countries-b2e41"
+  }
+}
